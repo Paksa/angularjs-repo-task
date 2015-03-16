@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html ng-app="App">
+<head>
+    <title>Task1 AngularJS Part1</title>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Controllers/RepositoriesController.js"></script>
+</head>
+<body ng-controller="repositoryController">
+    <select ng-model='filter' ng-options='filter.lookupCode as filter.description for filter in filterNames'></select>
+<select ng-model='reverse' ng-options="reverse.lookupCode as reverse.description for reverse in reverseNames"></select>
+    <input ng-model="limit" ng-change="onLimitChange()" value="{{limit}}" />
+        <ul ng-repeat="repo in repositories |  orderBy:filter:reverse=='false' | limitTo:limit">
+            <div>
+                <table>
+                    <tr>
+                        <td><img ng-src="{{repo.owner.avatar_url}}"/></td>
+                        <td>
+                            <table>
+                                <tr><td>Repo Name: {{repo.full_name}}</td></tr>
+                                <tr><td>Description: {{repo.description}}</td></tr>
+                                <tr><td>Owner ID: {{repo.owner.id}}</td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+            </div>
+        </ul>
+</body>
+</html>
